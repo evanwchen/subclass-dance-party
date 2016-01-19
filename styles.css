@@ -21,8 +21,7 @@ body, a:link, a:visited, a:active{
   background-color: #777;
 }
 .blinkyDancer{
-  border:10px solid red;
-  border-radius:10px;
+  content:url(http://cdn.wikimg.net/strategywiki/images/f/f2/Galaga_Flagship1.png);
   position:absolute;
 }
 .blueDancer{

@@ -9,7 +9,7 @@ $(document).ready(function() {
     var blinkyDancer = new BlinkyDancer(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      5,
+      150,
       'blinkyDancer'
     );
 
@@ -25,7 +25,7 @@ $(document).ready(function() {
     var blueDancer = new BlueDancer(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      5,
+      150,
       'blueDancer'
     );
 
@@ -41,7 +41,7 @@ $(document).ready(function() {
     var greenDancer = new GreenDancer(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      5,
+      150,
       'greenDancer'
     );
 
@@ -59,10 +59,15 @@ $(document).ready(function() {
   });
 
   $(document).on("mouseover", ".dancer", function(event) {
-    // remove from window.dancers
-    window.dancers.splice(window.dancers.indexOf($(this)),1);
+    var index = -1;
+    for (var i = 0; i < window.dancers.length; i++) {
+      if (window.dancers[i].$node[0]['outerHTML'] == $(this)[0]['outerHTML']) {
+        index = i;
+        break;
+      }
+    }
+    window.dancers.splice(index,1);
 
-    // remove node from $('body')
     $(this).remove();
   });  
 
