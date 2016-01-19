@@ -20,17 +20,16 @@ body, a:link, a:visited, a:active{
 .title{
   background-color: #777;
 }
+.dancer{
+  max-height:40px;
+  position:absolute;
+}
 .blinkyDancer{
   content:url(http://cdn.wikimg.net/strategywiki/images/f/f2/Galaga_Flagship1.png);
-  position:absolute;
 }
 .blueDancer{
-  border:10px solid blue;
-  border-radius:10px;
-  position:absolute;
+  content:url(http://cdn.wikimg.net/strategywiki/images/7/7e/Galaga_Flagship2.png);
 }
 .greenDancer{
-  border:10px solid green;
-  border-radius:10px;
-  position:absolute;
+  content:url(http://cdn.wikimg.net/strategywiki/images/4/4d/Galaga_Bosconian.png);
 }
