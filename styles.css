@@ -24,12 +24,18 @@ body, a:link, a:visited, a:active{
   max-height:40px;
   position:absolute;
 }
-.blinkyDancer{
+.tealFlagshipDancer{
   content:url(http://cdn.wikimg.net/strategywiki/images/f/f2/Galaga_Flagship1.png);
 }
-.blueDancer{
-  content:url(http://cdn.wikimg.net/strategywiki/images/7/7e/Galaga_Flagship2.png);
+.blueFlagshipDancer{
+  content:url(http://cdn.wikimg.net/strategywiki/images/9/9b/Galaga_Bee.png);
 }
-.greenDancer{
+.bosconianDancer{
   content:url(http://cdn.wikimg.net/strategywiki/images/4/4d/Galaga_Bosconian.png);
+}
+.left {
+  transform: rotate(90deg);
+}
+.right {
+  transform: rotate(270deg);
 }
