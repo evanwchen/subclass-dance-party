@@ -1,33 +1,70 @@
 $(document).ready(function() {
   window.dancers = [];
 
-  $(".addDancerButton").on("click", function(event) {
-    /* This function sets up the click handlers for the create-dancer
-     * buttons on dancefloor.html. You should only need to make one small change to it.
-     * As long as the "data-dancer-maker-function-name" attribute of a
-     * class="addDancerButton" DOM node matches one of the names of the
-     * maker functions available in the global scope, clicking that node
-     * will call the function to make the dancer.
-     */
-
-    /* dancerMakerFunctionName is a string which must match
-     * one of the dancer maker functions available in global scope.
-     * A new object of the given type will be created and added
-     * to the stage.
-     */
+  $(".addBlinkyDancerButton").on("click", function(event) {
     var dancerMakerFunctionName = $(this).data("BlinkyDancer");
 
-    // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[BlinkyDancer];
 
-    // make a dancer with a random position
-
-    var dancer = new BlinkyDancer(
+    var blinkyDancer = new BlinkyDancer(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      Math.random() * 1000
+      //Math.random() * 1000,
+      1,
+      'blinkyDancer'
     );
-    $('body').append(dancer.$node);
+
+    window.dancers.push(blinkyDancer);
+    $('body').append(blinkyDancer.$node);
   });
+
+  $(".addBlueDancerButton").on("click", function(event) {
+    var dancerMakerFunctionName = $(this).data("BlueDancer");
+
+    var dancerMakerFunction = window[BlueDancer];
+
+    var blueDancer = new BlueDancer(
+      $("body").height() * Math.random(),
+      $("body").width() * Math.random(),
+      //Math.random() * 1000,
+      1,
+      'blueDancer'
+    );
+
+    window.dancers.push(blueDancer);
+    $('body').append(blueDancer.$node);
+  });
+
+  $(".addGreenDancerButton").on("click", function(event) {
+    var dancerMakerFunctionName = $(this).data("GreenDancer");
+
+    var dancerMakerFunction = window[GreenDancer];
+
+    var greenDancer = new GreenDancer(
+      $("body").height() * Math.random(),
+      $("body").width() * Math.random(),
+      //Math.random() * 1000,
+      1,
+      'greenDancer'
+    );
+
+    window.dancers.push(greenDancer);
+    $('body').append(greenDancer.$node);
+  });
+
+  $(".lineUp").on("click", function(event) {
+    // set a var of height = $("body").height() / array.length
+    var rowHeight = $("body").height() / window.dancers.length;
+    var height = rowHeight / 2;
+    // loop through each value in window.dancers
+    for (var i = 0; i < window.dancers.length; i++) {
+      // .setPosition method with a new top (height) and left (5px) arguments
+      window.dancers[i].setPosition(height, 5);
+      // increase height by height
+      height += rowHeight;
+    }
+  });
+
+
 });
 
