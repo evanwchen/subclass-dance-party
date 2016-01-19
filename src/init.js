@@ -9,8 +9,7 @@ $(document).ready(function() {
     var blinkyDancer = new BlinkyDancer(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      //Math.random() * 1000,
-      1,
+      5,
       'blinkyDancer'
     );
 
@@ -26,8 +25,7 @@ $(document).ready(function() {
     var blueDancer = new BlueDancer(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      //Math.random() * 1000,
-      1,
+      5,
       'blueDancer'
     );
 
@@ -43,8 +41,7 @@ $(document).ready(function() {
     var greenDancer = new GreenDancer(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      //Math.random() * 1000,
-      1,
+      5,
       'greenDancer'
     );
 
@@ -53,17 +50,21 @@ $(document).ready(function() {
   });
 
   $(".lineUp").on("click", function(event) {
-    // set a var of height = $("body").height() / array.length
     var rowHeight = $("body").height() / window.dancers.length;
     var height = rowHeight / 2;
-    // loop through each value in window.dancers
     for (var i = 0; i < window.dancers.length; i++) {
-      // .setPosition method with a new top (height) and left (5px) arguments
       window.dancers[i].setPosition(height, 5);
-      // increase height by height
       height += rowHeight;
     }
   });
+
+  $(document).on("mouseover", ".dancer", function(event) {
+    // remove from window.dancers
+    window.dancers.splice(window.dancers.indexOf($(this)),1);
+
+    // remove node from $('body')
+    $(this).remove();
+  });  
 
 
 });

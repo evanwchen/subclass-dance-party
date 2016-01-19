@@ -1,5 +1,6 @@
 var Dancer = function(top, left, timeBetweenSteps, dancerType) {
-  this.$node = $('<span class='+dancerType+'></span>');
+  var dancerClass = dancerType.concat(" dancer");
+  this.$node = $('<span class="'+dancerClass+'"></span>');
   this.timeBetweenSteps = timeBetweenSteps;
   this.step();
   this.setPosition(top,left);

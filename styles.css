@@ -3,8 +3,8 @@ body, html{
 }
 body{
   margin: 0px;
-  background-color:#444;
   font-size: 18px;
+  background-image: url(https://wallpaperscraft.com/image/art_star_tree_sky_space_93472_3840x2160.jpg);
 }
 body, a:link, a:visited, a:active{
   color: lightblue;
