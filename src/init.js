@@ -1,15 +1,38 @@
 $(document).ready(function() {
   window.dancers = [];
+  var p2 = {}; // stores current mouse coords
+  var p1 = {}; // stores previous mouse coords
+  var isFirstCheck = true;
 
   $(document).on("mousemove", function(event) {
+    if (!isFirstCheck) {
+      p1.x = p2.x;
+      p1.y = p2.y; 
+    }
+
+    p2.x = event.pageX;
+    p2.y = event.pageY;
+
+    var angleDeg = (Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI);
+
+    if(angleDeg >= 360){
+      angleDeg -= 360;
+    }
+
     if (event.pageY-20 < 32) {
       $(".pacman").css({left:(event.pageX-20), top:(32)});      
     } else {
-      $(".pacman").css({left:(event.pageX-20), top:(event.pageY-20)});
+      $(".pacman").css({
+        left:(event.pageX-20), 
+        top:(event.pageY-20),
+        'transform':'rotate(' + angleDeg + 'deg)'
+      });
       $('.game').css({
         'cursor':'none'
       });
     }
+
+    isFirstCheck = false;
   });
 
   $(".addDancerButton").on("click", function(event) {
@@ -66,7 +89,7 @@ $(document).ready(function() {
 
   $(".nightmareMode").on("click", function(event) {
     if ($(this).text() === 'Turn Nightmare Mode On') {
-      var start = window.setInterval(function() {
+      window.start = window.setInterval(function() {
         var dancer = new TealFlagshipDancer(
           $("body").height() * Math.random(),
           $("body").width() * Math.random(),
@@ -78,10 +101,11 @@ $(document).ready(function() {
         $('body').append(dancer.$node);
       }, 1000);
     } else {
-      window.clearInterval(start);
+      window.clearInterval(window.start);
     }
 
     var text = $(this).text() === 'Turn Nightmare Mode On' ? 'Turn Nightmare Mode Off' : 'Turn Nightmare Mode On';
     $(this).text(text);
   });
+
 });
