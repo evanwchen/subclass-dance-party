@@ -1,52 +1,38 @@
 $(document).ready(function() {
   window.dancers = [];
 
-  $(".addTealFlagshipDancerButton").on("click", function(event) {
-    var dancerMakerFunctionName = $(this).data("TealFlagshipDancer");
-
-    var dancerMakerFunction = window[TealFlagshipDancer];
-
-    var tealFlagshipDancer = new TealFlagshipDancer(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
-      150,
-      'tealFlagshipDancer'
-    );
-
-    window.dancers.push(tealFlagshipDancer);
-    $('body').append(tealFlagshipDancer.$node);
+  $(document).on("mousemove", function(event) {
+    if (event.pageY-20 < 32) {
+      $(".pacman").css({left:(event.pageX-20), top:(32)});      
+    } else {
+      $(".pacman").css({left:(event.pageX-20), top:(event.pageY-20)});
+      $('.game').css({
+        'cursor':'none'
+      });
+    }
   });
 
-  $(".addBlueFlagshipDancerButton").on("click", function(event) {
-    var dancerMakerFunctionName = $(this).data("BlueFlagshipDancer");
+  $(".addDancerButton").on("click", function(event) {
+    var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
 
-    var dancerMakerFunction = window[BlueFlagshipDancer];
+    var dancerType;
+    if (dancerMakerFunctionName === "TealFlagshipDancer") {
+      dancerType = 'tealFlagshipDancer';
+    } else if (dancerMakerFunctionName === "BlueFlagshipDancer") {
+      dancerType = 'blueFlagshipDancer';
+    } else if (dancerMakerFunctionName === "BosconianDancer") {
+      dancerType = 'bosconianDancer';
+    }
 
-    var blueFlagshipDancer = new BlueFlagshipDancer(
+    var dancer = new window[dancerMakerFunctionName](
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
       150,
-      'blueFlagshipDancer'
+      dancerType
     );
 
-    window.dancers.push(blueFlagshipDancer);
-    $('body').append(blueFlagshipDancer.$node);
-  });
-
-  $(".addBosconianDancerButton").on("click", function(event) {
-    var dancerMakerFunctionName = $(this).data("BosconianDancer");
-
-    var dancerMakerFunction = window[BosconianDancer];
-
-    var bosconianDancer = new BosconianDancer(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
-      150,
-      'bosconianDancer'
-    );
-
-    window.dancers.push(bosconianDancer);
-    $('body').append(bosconianDancer.$node);
+    window.dancers.push(dancer);
+    $('body').append(dancer.$node);
   });
 
   $(".lineUp").on("click", function(event) {
@@ -68,7 +54,7 @@ $(document).ready(function() {
   $(document).on("mouseover", ".dancer", function(event) {
     var index = -1;
     for (var i = 0; i < window.dancers.length; i++) {
-      if (window.dancers[i].$node[0]['outerHTML'] == $(this)[0]['outerHTML']) {
+      if (window.dancers[i].$node[0].outerHTML == $(this)[0].outerHTML) {
         index = i;
         break;
       }
@@ -78,24 +64,24 @@ $(document).ready(function() {
     $(this).remove();
   });  
 
-  // $(".nightmareMode").on("click", function(event) {
-  //   setTimeout(function() {
-  //     var dancerMakerFunctionName = $(this).data("BlueFlagshipDancer");
+  $(".nightmareMode").on("click", function(event) {
+    if ($(this).text() === 'Turn Nightmare Mode On') {
+      var start = window.setInterval(function() {
+        var dancer = new TealFlagshipDancer(
+          $("body").height() * Math.random(),
+          $("body").width() * Math.random(),
+          150,
+          'tealFlagshipDancer'
+        );
 
-  //     var dancerMakerFunction = window[BlueFlagshipDancer];
+        window.dancers.push(dancer);
+        $('body').append(dancer.$node);
+      }, 1000);
+    } else {
+      window.clearInterval(start);
+    }
 
-  //     var blueFlagshipDancer = new BlueFlagshipDancer(
-  //       $("body").height() * Math.random(),
-  //       $("body").width() * Math.random(),
-  //       150,
-  //       'blueFlagshipDancer'
-  //     );
-
-  //     window.dancers.push(blueFlagshipDancer);
-  //     $('body').append(blueFlagshipDancer.$node);
-  //   }, 5);
-  // });
-
-
+    var text = $(this).text() === 'Turn Nightmare Mode On' ? 'Turn Nightmare Mode Off' : 'Turn Nightmare Mode On';
+    $(this).text(text);
+  });
 });
-
